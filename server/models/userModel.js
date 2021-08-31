@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   userEmail: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -19,6 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   funds: {
     type: Number,
+    default: 1000000,
     required: true,
   },
 });
