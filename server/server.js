@@ -23,8 +23,10 @@ app.get("/", async (req, res) => {
 
 // Importing Routes
 const addDataRoute = require("./routes/addData");
+const getDataRoute = require("./routes/getData");
 
 app.use("/adddata", addDataRoute);
+app.use("/getdata", getDataRoute);
 
 app.listen(port, () => {
   console.log(`Server started successfully on port ${port}`);
