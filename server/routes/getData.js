@@ -5,6 +5,7 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
+const decodeToken = require("../middlewares/verifyDecodeToken");
 
 router.get("/", async (req, res) => {
   res.send("Here we get data");
@@ -37,6 +38,22 @@ router.post("/user/login", async (req, res) => {
     );
 
     res.status(200).send(token);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+// User profile details route
+router.get("/user/profile", decodeToken, async (req, res) => {
+  try {
+    const { uid } = req.headers.tokenData;
+
+    const profileData = await userModel
+      .findOne({ uid })
+      .select({ password: 0 });
+
+    res.status(200).json(profileData);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
