@@ -24,7 +24,7 @@ router.post("/user/register", async (req, res) => {
     const newData = new userModel(req.body);
     const savedData = await newData.save();
 
-    res.status(201).json(savedData);
+    res.sendStatus(201);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

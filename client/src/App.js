@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
-import { Container, makeStyles, CssBaseline } from "@material-ui/core";
+import Register from "./components/Register";
+import { Container, CssBaseline } from "@material-ui/core";
 
 export default function App() {
+  const [authToken, setAuthToken] = useState("");
+
   return (
     <>
       <CssBaseline />
@@ -14,8 +17,11 @@ export default function App() {
       >
         <Router>
           <Switch>
-            <Route path="/" exact>
-              <Login />
+            <Route path={["/", "/login"]} exact>
+              <Login authToken={authToken} setAuthToken={setAuthToken} />
+            </Route>
+            <Route path="/register" exact>
+              <Register />
             </Route>
             <Route path="/about" exact>
               <div>

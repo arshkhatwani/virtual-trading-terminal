@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { Box, TextField, Typography, Button } from "@material-ui/core";
-
+import axios from "axios";
+import { Link } from "react-router-dom";
 // #f5f5f5
 
 export default function Login(props) {
+
+  const { authToken, setAuthToken } = props;
+
   const [formBody, setFormBody] = useState({ userEmail: "", password: "" });
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    // console.log("Form submitted");
+
+    console.log(formBody)
   };
 
   return (
@@ -59,6 +65,7 @@ export default function Login(props) {
         >
           Login
         </Button>
+        <Link to="/register">Sign up here</Link>
       </Box>
     </Box>
   );
