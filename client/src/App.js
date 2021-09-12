@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Profile from "./components/Profile";
 import { Container, CssBaseline } from "@material-ui/core";
 
 export default function App() {
   const [authToken, setAuthToken] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <>
@@ -18,7 +20,20 @@ export default function App() {
         <Router>
           <Switch>
             <Route path={["/", "/login"]} exact>
-              <Login authToken={authToken} setAuthToken={setAuthToken} />
+              <Login
+                authToken={authToken}
+                setAuthToken={setAuthToken}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
+            </Route>
+            <Route path="/profile" exact>
+              <Profile
+                authToken={authToken}
+                setAuthToken={setAuthToken}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
             </Route>
             <Route path="/register" exact>
               <Register />

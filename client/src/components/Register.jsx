@@ -111,9 +111,9 @@ export default function Register() {
             }}
           />
           <Typography>
-              <li>Password should contain at least one lowercase letter.</li>
-              <li>Password should contain at least one upercase letter.</li>
-              <li>Password should contain at least one number.</li>
+            <li>Password should contain at least one lowercase letter.</li>
+            <li>Password should contain at least one upercase letter.</li>
+            <li>Password should contain at least one number.</li>
           </Typography>
           <Button
             variant="contained"
@@ -124,7 +124,14 @@ export default function Register() {
           >
             Submit
           </Button>
-          <Link to="/login">Login here</Link>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="10px"
+          >
+            <Link to="/login">Login here</Link>
+          </Box>
         </Box>
       </Box>
     </>

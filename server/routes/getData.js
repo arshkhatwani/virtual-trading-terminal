@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
 // User login route
 router.post("/user/login", async (req, res) => {
   try {
-    var { email, password } = req.body;
+    var { userEmail, password } = req.body;
 
     const checkData = await userModel
-      .findOne({ userEmail: email })
+      .findOne({ userEmail })
       .select({ userEmail: 1, password: 1, uid: 1 });
 
     // Checking if user exists
