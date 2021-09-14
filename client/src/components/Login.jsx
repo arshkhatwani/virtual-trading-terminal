@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField, Typography, Button } from "@material-ui/core";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
@@ -12,6 +12,13 @@ export default function Login(props) {
 
   const [showError, setShowError] = useState("none");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    if(localStorage.authToken != undefined){
+      setAuthToken(localStorage.authToken);
+      setIsAuth(true);
+    }
+  }, [])
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
