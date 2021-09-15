@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import url from "../url";
+import Navbar from "./Navbar";
 
 export default function Profile(props) {
   const { authToken, setAuthToken, isAuth, setIsAuth } = props;
@@ -41,8 +42,10 @@ export default function Profile(props) {
   }
 
   return (
-    <div>
-      <h1>This is profile of {profileData.userName}</h1>
-    </div>
+    <>
+      <div>
+        <h1>This is profile of {profileData.userName}</h1>
+      </div>
+    </>
   );
 }

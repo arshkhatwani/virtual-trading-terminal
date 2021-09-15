@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import Navbar from "./components/Navbar";
 import { Container, CssBaseline } from "@material-ui/core";
 
 export default function App() {
@@ -27,6 +28,18 @@ export default function App() {
                 setIsAuth={setIsAuth}
               />
             </Route>
+            <Route path="/register" exact>
+              <Register />
+            </Route>
+          </Switch>
+
+          <Navbar
+            authToken={authToken}
+            setAuthToken={setAuthToken}
+            isAuth={isAuth}
+            setIsAuth={setIsAuth}
+          />
+          <Switch>
             <Route path="/profile" exact>
               <Profile
                 authToken={authToken}
@@ -34,9 +47,6 @@ export default function App() {
                 isAuth={isAuth}
                 setIsAuth={setIsAuth}
               />
-            </Route>
-            <Route path="/register" exact>
-              <Register />
             </Route>
             <Route path="/about" exact>
               <div>
