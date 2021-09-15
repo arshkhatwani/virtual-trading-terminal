@@ -28,19 +28,18 @@ export default function App() {
                 setIsAuth={setIsAuth}
               />
             </Route>
+
             <Route path="/register" exact>
               <Register />
             </Route>
-          </Switch>
 
-          <Navbar
-            authToken={authToken}
-            setAuthToken={setAuthToken}
-            isAuth={isAuth}
-            setIsAuth={setIsAuth}
-          />
-          <Switch>
             <Route path="/profile" exact>
+              <Navbar
+                authToken={authToken}
+                setAuthToken={setAuthToken}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
               <Profile
                 authToken={authToken}
                 setAuthToken={setAuthToken}
@@ -48,16 +47,31 @@ export default function App() {
                 setIsAuth={setIsAuth}
               />
             </Route>
+
             <Route path="/about" exact>
+              <Navbar
+                authToken={authToken}
+                setAuthToken={setAuthToken}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
               <div>
                 <h1>About Page</h1>
               </div>
             </Route>
+
             <Route path="/contact" exact>
+              <Navbar
+                authToken={authToken}
+                setAuthToken={setAuthToken}
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+              />
               <div>
                 <h1>Contact Page</h1>
               </div>
             </Route>
+
             <h1>404 not found</h1>
           </Switch>
         </Router>
