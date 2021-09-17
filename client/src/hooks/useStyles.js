@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: theme.palette.text.primary,
   },
+  text_color: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 export default useStyles;

@@ -39,6 +39,7 @@ export default function App() {
                 setAuthToken={setAuthToken}
                 isAuth={isAuth}
                 setIsAuth={setIsAuth}
+                active="Profile"
               />
               <Profile
                 authToken={authToken}
@@ -54,6 +55,7 @@ export default function App() {
                 setAuthToken={setAuthToken}
                 isAuth={isAuth}
                 setIsAuth={setIsAuth}
+                active="About"
               />
               <div>
                 <h1>About Page</h1>
@@ -66,6 +68,7 @@ export default function App() {
                 setAuthToken={setAuthToken}
                 isAuth={isAuth}
                 setIsAuth={setIsAuth}
+                active="Contact"
               />
               <div>
                 <h1>Contact Page</h1>

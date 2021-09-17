@@ -3,13 +3,15 @@ import { AppBar, Typography, Button, Box, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import useStyles from "../hooks/useStyles";
 import PersonIcon from "@material-ui/icons/Person";
+import { red } from "@mui/material/colors";
 
 export default function Navbar(props) {
-  const { authToken, setAuthToken, isAuth, setIsAuth } = props;
+  const { authToken, setAuthToken, isAuth, setIsAuth, active } = props;
 
   const classes = useStyles();
 
   const [navTitle, setNavTitle] = useState("Navbar");
+  const [activeOption, setActiveOption] = useState(active);
 
   const navLinks = [
     {
@@ -44,7 +46,15 @@ export default function Navbar(props) {
                 to={item.to}
                 style={{ marginRight: 10 }}
               >
-                <Button size="small">{item.title}</Button>
+                <Button
+                  size="small"
+                  style={{ color: activeOption == item.title ? red[500] : "" }}
+                  onClick={(e) => {
+                    setActiveOption(item.title);
+                  }}
+                >
+                  {item.title}
+                </Button>
               </Link>
             );
           })}

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import url from "../url";
-import Navbar from "./Navbar";
+import { Box, Typography } from "@material-ui/core";
+import useStyles from "../hooks/useStyles";
 
 export default function Profile(props) {
   const { authToken, setAuthToken, isAuth, setIsAuth } = props;
 
   const [profileData, setProfileData] = useState({});
+
+  const classes = useStyles();
 
   useEffect(() => {
     // console.log("authToken: ", authToken);
@@ -43,9 +46,15 @@ export default function Profile(props) {
 
   return (
     <>
-      <div>
-        <h1>This is profile of {profileData.userName}</h1>
-      </div>
+      <Box display="flex" flexDirection="column" padding="1rem">
+        <Typography variant="h4">Hi, {profileData.userName}</Typography>
+        <hr style={{ width: "100%" }} />
+        <Box>
+          <Typography variant="h5" component="h5">
+            Balance
+          </Typography>
+        </Box>
+      </Box>
     </>
   );
 }
