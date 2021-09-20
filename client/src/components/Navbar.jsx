@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { AppBar, Typography, Button, Box, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import useStyles from "../hooks/useStyles";
-import PersonIcon from "@material-ui/icons/Person";
 import { red } from "@mui/material/colors";
+import Sidebar from "./Sidebar";
 
 export default function Navbar(props) {
   const { authToken, setAuthToken, isAuth, setIsAuth, active } = props;
@@ -48,7 +48,9 @@ export default function Navbar(props) {
               >
                 <Button
                   size="small"
-                  style={{ color: activeOption == item.title ? red[500] : "" }}
+                  style={{
+                    color: activeOption === item.title ? red[500] : "",
+                  }}
                   onClick={(e) => {
                     setActiveOption(item.title);
                   }}

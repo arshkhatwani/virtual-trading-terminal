@@ -8,6 +8,15 @@ const useStyles = makeStyles((theme) => ({
   text_color: {
     color: theme.palette.text.primary,
   },
+  text_secondary: {
+    color: theme.palette.text.secondary,
+  },
+  text_disabled: {
+    color: theme.palette.text.disabled,
+  },
+  thinHeading: {
+    fontWeight: 300,
+  },
 }));
 
 export default useStyles;

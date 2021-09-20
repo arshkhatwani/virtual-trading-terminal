@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
-import { Container, CssBaseline } from "@material-ui/core";
+import Sidebar from "./components/Sidebar";
+import { Container, CssBaseline, Box } from "@material-ui/core";
 
 export default function App() {
   const [authToken, setAuthToken] = useState("");
@@ -34,19 +35,24 @@ export default function App() {
             </Route>
 
             <Route path="/profile" exact>
-              <Navbar
-                authToken={authToken}
-                setAuthToken={setAuthToken}
-                isAuth={isAuth}
-                setIsAuth={setIsAuth}
-                active="Profile"
-              />
-              <Profile
-                authToken={authToken}
-                setAuthToken={setAuthToken}
-                isAuth={isAuth}
-                setIsAuth={setIsAuth}
-              />
+              <Box display="flex">
+                <Sidebar />
+                <Box display="flex" flexDirection="column" flexGrow="1">
+                  <Navbar
+                    authToken={authToken}
+                    setAuthToken={setAuthToken}
+                    isAuth={isAuth}
+                    setIsAuth={setIsAuth}
+                    active="Profile"
+                  />
+                  <Profile
+                    authToken={authToken}
+                    setAuthToken={setAuthToken}
+                    isAuth={isAuth}
+                    setIsAuth={setIsAuth}
+                  />
+                </Box>
+              </Box>
             </Route>
 
             <Route path="/about" exact>

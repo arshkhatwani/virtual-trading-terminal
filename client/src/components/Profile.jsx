@@ -40,6 +40,14 @@ export default function Profile(props) {
     }
   }, []);
 
+  const displayFunds = (funds) => {
+    if (funds > 99999) {
+      return (funds / 100000).toFixed(2).toString() + "L";
+    } else if (funds > 999) {
+      return (funds / 1000).toFixed(2).toString() + "k";
+    } else return funds;
+  };
+
   if (!isAuth) {
     return <Redirect to="/login" />;
   }
@@ -50,8 +58,18 @@ export default function Profile(props) {
         <Typography variant="h4">Hi, {profileData.userName}</Typography>
         <hr style={{ width: "100%" }} />
         <Box>
-          <Typography variant="h5" component="h5">
-            Balance
+          <Typography
+            variant="h5"
+            component="h5"
+            style={{ marginBottom: "10px" }}
+          >
+            Balance :
+          </Typography>
+          <Typography variant="h3" className={classes.thinHeading}>
+            {displayFunds(profileData.funds)}
+          </Typography>
+          <Typography className={[classes.text_secondary, classes.thinHeading]}>
+            Margin available
           </Typography>
         </Box>
       </Box>
