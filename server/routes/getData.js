@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
 const decodeToken = require("../middlewares/verifyDecodeToken");
+const stocks = require("../stocks");
 
 router.get("/", async (req, res) => {
   res.send("Here we get data");
@@ -54,6 +55,26 @@ router.get("/user/profile", decodeToken, async (req, res) => {
       .select({ password: 0 });
 
     res.status(200).json(profileData);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+// Search query
+router.get("/search/query", async (req, res) => {
+  try {
+    var { qry } = req.headers;
+    qry = qry.toLowerCase();
+    // console.log(qry)
+
+    var searchResults = stocks.filter((item) => {
+      return item.company_name.toLowerCase().includes(qry) || item.symbol.toLowerCase().includes(qry);
+    })
+
+    // console.log(searchResults);
+
+    res.status(200).json(searchResults);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
