@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Drawer, Box, makeStyles, TextField } from "@material-ui/core";
 import axios from "axios";
 import url from "../url";
+import PriceComp from "./PriceComp";
 
 const drawerWidth = 350;
 
@@ -56,6 +57,8 @@ export default function Sidebar() {
             placeholder="Search stocks, indices etc."
             onChange={onChangeHandler}
           />
+
+          <PriceComp />
         </Box>
       </Drawer>
     </>
