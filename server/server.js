@@ -20,22 +20,30 @@ mongoose.connect(dbUrl, () => {
 
 const marketToken = require("./marketToken");
 const WebSocket = require("ws");
+const stocks = require("./stocks");
 const socket = new WebSocket(`wss://ws.finnhub.io?token=${marketToken}`);
 socket.addEventListener("open", function (event) {
-  // socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'AAPL'}))
-  socket.send(JSON.stringify({ type: "subscribe", symbol: "BINANCE:ETHUSDT" }));
-  socket.send(JSON.stringify({ type: "subscribe", symbol: "BINANCE:BTCUSDT" }));
+  // socket.send(JSON.stringify({ type: "subscribe", symbol: "BINANCE:BTCUSDT" }));
+  stocks.forEach((item) => {
+    socket.send(JSON.stringify({ type: "subscribe", symbol: item.symbol }));
+  });
 });
 
 io.on("connection", (clientSocket) => {
   console.log("A new user connected");
   clientSocket.emit("hello", "Server says hello");
+
   socket.addEventListener("message", function (event) {
     ltp = JSON.parse(event.data);
     if (ltp.data) {
-      // console.log(ltp.data[0].p + "\n");
-      clientSocket.emit("price", ltp.data[0].p);
-      // clientSocket.emit("price", 100);
+      stocks.forEach((item) => {
+        if (ltp.data[0].s === item.symbol) {
+          clientSocket.emit("price", {
+            symbol: item.symbol,
+            ltp: ltp.data[0].p,
+          });
+        }
+      });
     }
   });
 });

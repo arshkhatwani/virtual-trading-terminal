@@ -41,8 +41,8 @@ export default function Profile(props) {
   }, []);
 
   const displayFunds = (funds) => {
-    if (funds > 99999) {
-      return (funds / 100000).toFixed(2).toString() + "L";
+    if (funds > 999999) {
+      return (funds / 1000000).toFixed(2).toString() + "m";
     } else if (funds > 999) {
       return (funds / 1000).toFixed(2).toString() + "k";
     } else return funds;
@@ -66,7 +66,7 @@ export default function Profile(props) {
             Balance :
           </Typography>
           <Typography variant="h3" className={classes.thinHeading}>
-            {displayFunds(profileData.funds)}
+            ${displayFunds(profileData.funds)}
           </Typography>
           <Typography className={[classes.text_secondary, classes.thinHeading]}>
             Margin available

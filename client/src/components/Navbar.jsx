@@ -39,9 +39,10 @@ export default function Navbar(props) {
         }}
       >
         <Box display="flex" justifyContent="flex-end" padding="1rem">
-          {navLinks.map((item) => {
+          {navLinks.map((item, index) => {
             return (
               <Link
+                key={index}
                 className={classes.link_class}
                 to={item.to}
                 style={{ marginRight: 10 }}
