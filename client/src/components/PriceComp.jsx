@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import url from "../url";
+import StockTab from "./StockTab";
+import { Box } from "@material-ui/core";
+import useStyles from "../hooks/useStyles";
 
 export default function PriceComp() {
+  const classes = useStyles();
+
   var [prices, setPrices] = useState({});
 
   useEffect(() => {
@@ -25,15 +30,28 @@ export default function PriceComp() {
   }, []);
 
   return (
-    <div>
-      <h1>Marketwatch</h1>
-      {Object.keys(prices).map((item, index) => {
-        return (
-          <p key={index}>
-            {item}: &nbsp; {prices[item]}
-          </p>
-        );
-      })}
-    </div>
+    <>
+      <Box padding="6px">
+        <h1 className={classes.thinHeading}>Marketwatch</h1>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {Object.keys(prices).map((item, index) => {
+            if (item.substr(0, 7) === "BINANCE")
+              return (
+                <StockTab
+                  key={index}
+                  symbol={item.substring(8)}
+                  ltp={prices[item]}
+                />
+              );
+            return <StockTab key={index} symbol={item} ltp={prices[item]} />;
+          })}
+        </Box>
+      </Box>
+    </>
   );
 }
