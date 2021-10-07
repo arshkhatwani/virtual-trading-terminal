@@ -5,7 +5,21 @@ import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import { Container, CssBaseline, Box } from "@material-ui/core";
+import {
+  Container,
+  CssBaseline,
+  Box,
+  createTheme,
+  ThemeProvider,
+} from "@material-ui/core";
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: "#ff3d00",
+    },
+  },
+});
 
 export default function App() {
   const [authToken, setAuthToken] = useState("");
@@ -14,77 +28,79 @@ export default function App() {
   return (
     <>
       <CssBaseline />
-      <Container
-        disableGutters={true}
-        maxWidth="xl"
-        style={{ minHeight: "100vh" }}
-      >
-        <Router>
-          <Switch>
-            <Route path={["/", "/login"]} exact>
-              <Login
-                authToken={authToken}
-                setAuthToken={setAuthToken}
-                isAuth={isAuth}
-                setIsAuth={setIsAuth}
-              />
-            </Route>
+      <ThemeProvider theme={theme}>
+        <Container
+          disableGutters={true}
+          maxWidth="xl"
+          style={{ minHeight: "100vh" }}
+        >
+          <Router>
+            <Switch>
+              <Route path={["/", "/login"]} exact>
+                <Login
+                  authToken={authToken}
+                  setAuthToken={setAuthToken}
+                  isAuth={isAuth}
+                  setIsAuth={setIsAuth}
+                />
+              </Route>
 
-            <Route path="/register" exact>
-              <Register />
-            </Route>
+              <Route path="/register" exact>
+                <Register />
+              </Route>
 
-            <Route path="/profile" exact>
-              <Box display="flex">
-                <Sidebar />
-                <Box display="flex" flexDirection="column" flexGrow="1">
-                  <Navbar
-                    authToken={authToken}
-                    setAuthToken={setAuthToken}
-                    isAuth={isAuth}
-                    setIsAuth={setIsAuth}
-                    active="Profile"
-                  />
-                  <Profile
-                    authToken={authToken}
-                    setAuthToken={setAuthToken}
-                    isAuth={isAuth}
-                    setIsAuth={setIsAuth}
-                  />
+              <Route path="/profile" exact>
+                <Box display="flex">
+                  <Sidebar />
+                  <Box display="flex" flexDirection="column" flexGrow="1">
+                    <Navbar
+                      authToken={authToken}
+                      setAuthToken={setAuthToken}
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                      active="Profile"
+                    />
+                    <Profile
+                      authToken={authToken}
+                      setAuthToken={setAuthToken}
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                    />
+                  </Box>
                 </Box>
-              </Box>
-            </Route>
+              </Route>
 
-            <Route path="/about" exact>
-              <Navbar
-                authToken={authToken}
-                setAuthToken={setAuthToken}
-                isAuth={isAuth}
-                setIsAuth={setIsAuth}
-                active="About"
-              />
-              <div>
-                <h1>About Page</h1>
-              </div>
-            </Route>
+              <Route path="/about" exact>
+                <Navbar
+                  authToken={authToken}
+                  setAuthToken={setAuthToken}
+                  isAuth={isAuth}
+                  setIsAuth={setIsAuth}
+                  active="About"
+                />
+                <div>
+                  <h1>About Page</h1>
+                </div>
+              </Route>
 
-            <Route path="/contact" exact>
-              <Navbar
-                authToken={authToken}
-                setAuthToken={setAuthToken}
-                isAuth={isAuth}
-                setIsAuth={setIsAuth}
-                active="Contact"
-              />
-              <div>
-                <h1>Contact Page</h1>
-              </div>
-            </Route>
+              <Route path="/contact" exact>
+                <Navbar
+                  authToken={authToken}
+                  setAuthToken={setAuthToken}
+                  isAuth={isAuth}
+                  setIsAuth={setIsAuth}
+                  active="Contact"
+                />
+                <div>
+                  <h1>Contact Page</h1>
+                </div>
+              </Route>
 
-            <h1>404 not found</h1>
-          </Switch>
-        </Router>
-      </Container>
+              <h1>404 not found</h1>
+            </Switch>
+          </Router>
+        </Container>
+      </ThemeProvider>
     </>
   );
 }

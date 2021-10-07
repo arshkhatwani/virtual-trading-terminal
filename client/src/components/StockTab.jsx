@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, Button } from "@material-ui/core";
 
 export default function StockTab(props) {
   const { symbol, ltp } = props;
@@ -12,12 +12,34 @@ export default function StockTab(props) {
       paddingX="6px"
       width="98%"
       boxShadow={1}
+      display="flex"
+      justifyContent="space-around"
     >
-      <Box style={{ float: "left" }}>
+      <Box>
         <Typography>{symbol}</Typography>
       </Box>
-      <Box style={{ float: "right" }}>
-        <Typography>{ltp}</Typography>
+      <Box>
+        <Button
+          variant="contained"
+          size="small"
+          disableElevation
+          style={{ margin: "0 0.1rem" }}
+          color="primary"
+        >
+          B
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          disableElevation
+          style={{ margin: "0 0.1rem" }}
+          color="secondary"
+        >
+          S
+        </Button>
+      </Box>
+      <Box boxSizing="border-box">
+        <Typography variant="subtitle2">{ltp}</Typography>
       </Box>
     </Box>
   );
