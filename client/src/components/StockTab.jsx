@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Typography, Button } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Button,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from "@material-ui/core";
 import OrderBox from "./OrderBox";
 
 export default function StockTab(props) {
@@ -24,49 +31,46 @@ export default function StockTab(props) {
         ltp={ltp}
         type="sell"
       />
-      <Box
-        marginBottom="10px"
-        paddingY="6px"
-        padding="6px"
-        paddingX="6px"
-        width="98%"
-        boxShadow={1}
-        display="flex"
-        justifyContent="space-around"
-      >
-        <Box>
-          <Typography>{symbol}</Typography>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            size="small"
-            disableElevation
-            style={{ margin: "0 0.1rem" }}
-            color="primary"
-            onClick={() => {
-              setOpenB(true);
-            }}
-          >
-            B
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            disableElevation
-            style={{ margin: "0 0.1rem" }}
-            color="secondary"
-            onClick={() => {
-              setOpenS(true);
-            }}
-          >
-            S
-          </Button>
-        </Box>
-        <Box boxSizing="border-box">
-          <Typography variant="subtitle2">{ltp}</Typography>
-        </Box>
-      </Box>
+      <Accordion style={{ width: "100%", marginBottom: "10px" }}>
+        <AccordionSummary>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Box>
+              <Typography>{symbol}</Typography>
+            </Box>
+            <Box>
+              <Typography variant="subtitle2">{ltp}</Typography>
+            </Box>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box display="flex" width="100%" justifyContent="space-evenly">
+            <Button
+              variant="contained"
+              size="small"
+              disableElevation
+              style={{ margin: "0 0.1rem" }}
+              color="primary"
+              onClick={() => {
+                setOpenB(true);
+              }}
+            >
+              B
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              disableElevation
+              style={{ margin: "0 0.1rem" }}
+              color="secondary"
+              onClick={() => {
+                setOpenS(true);
+              }}
+            >
+              S
+            </Button>
+          </Box>
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 }
