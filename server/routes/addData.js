@@ -148,7 +148,7 @@ router.post("/user/stock/sell", decodeToken, async (req, res) => {
         avgPrice = price2;
       }
 
-      if (qty2 < Math.abs(qty) && qty > 0) {
+      if (qty2 < Math.abs(qty) && qty2 > 0) {
         avgPrice = price;
       }
 
