@@ -70,6 +70,14 @@ router.post("/user/stock/buy", decodeToken, async (req, res) => {
         return res.status(200).json({ position: "cleared", newFunds: funds });
       }
 
+      if (totalQty < 0) {
+        avgPrice = price2;
+      }
+
+      if (qty > Math.abs(qty2) && qty2 < 0) {
+        avgPrice = price;
+      }
+
       const updatedPos = await userPositions.findOneAndUpdate(
         { uid, stock },
         { price: avgPrice, qty: totalQty },
@@ -140,7 +148,7 @@ router.post("/user/stock/sell", decodeToken, async (req, res) => {
         avgPrice = price2;
       }
 
-      if (qty2 < Math.abs(qty)) {
+      if (qty2 < Math.abs(qty) && qty > 0) {
         avgPrice = price;
       }
 
