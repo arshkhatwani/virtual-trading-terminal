@@ -8,21 +8,26 @@ import {
   AccordionSummary,
 } from "@material-ui/core";
 import OrderBox from "./OrderBox";
+import OrderMsg from "./OrderMsg";
 
 export default function StockTab(props) {
   const { symbol, ltp } = props;
 
   const [openB, setOpenB] = useState(false);
   const [openS, setOpenS] = useState(false);
+  const [openC, setOpenC] = useState(false);
 
   return (
     <>
+      <OrderMsg open={openC} setOpen={setOpenC} />
       <OrderBox
         open={openB}
         setOpen={setOpenB}
         title={`Buy ${symbol}`}
         ltp={ltp}
         type="buy"
+        msgOpen={openC}
+        setMsgOpen={setOpenC}
       />
       <OrderBox
         open={openS}
@@ -30,6 +35,8 @@ export default function StockTab(props) {
         title={`Sell ${symbol}`}
         ltp={ltp}
         type="sell"
+        msgOpen={openC}
+        setMsgOpen={setOpenC}
       />
       <Accordion style={{ width: "100%", marginBottom: "10px" }}>
         <AccordionSummary>

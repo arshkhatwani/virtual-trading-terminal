@@ -20,7 +20,7 @@ function PaperComponent(props) {
 }
 
 export default function OrderBox(props) {
-  const { open, setOpen, title, ltp, type } = props;
+  const { open, setOpen, title, ltp, type, msgOpen, setMsgOpen } = props;
 
   const btnColor = type === "buy" ? "primary" : "secondary";
   const themeColor = type === "buy" ? "#3f51b5" : "#ff3d00";
@@ -102,7 +102,10 @@ export default function OrderBox(props) {
             variant="contained"
             disableElevation
             color={btnColor}
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              setMsgOpen(true);
+            }}
           >
             Execute
           </Button>
