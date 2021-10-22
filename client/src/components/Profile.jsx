@@ -6,7 +6,7 @@ import { Box, Typography } from "@material-ui/core";
 import useStyles from "../hooks/useStyles";
 
 export default function Profile(props) {
-  const { authToken, setAuthToken, isAuth, setIsAuth } = props;
+  const { authToken, setAuthToken, isAuth, setIsAuth, funds, setFunds } = props;
 
   const [profileData, setProfileData] = useState({});
 
@@ -26,6 +26,7 @@ export default function Profile(props) {
         .then((res) => {
           if (res.status === 200) {
             setProfileData(res.data);
+            setFunds(res.data.funds);
             if (!isAuth) setIsAuth(true);
           }
         })
@@ -66,7 +67,7 @@ export default function Profile(props) {
             Balance :
           </Typography>
           <Typography variant="h3" className={classes.thinHeading}>
-            ${displayFunds(profileData.funds)}
+            ${displayFunds(funds)}
           </Typography>
           <Typography className={[classes.text_secondary, classes.thinHeading]}>
             Margin available

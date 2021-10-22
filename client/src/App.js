@@ -24,6 +24,7 @@ const theme = createTheme({
 export default function App() {
   const [authToken, setAuthToken] = useState("");
   const [isAuth, setIsAuth] = useState(false);
+  const [funds, setFunds] = useState(0);
 
   return (
     <>
@@ -51,7 +52,11 @@ export default function App() {
 
               <Route path="/profile" exact>
                 <Box display="flex">
-                  <Sidebar />
+                  <Sidebar
+                    authToken={authToken}
+                    funds={funds}
+                    setFunds={setFunds}
+                  />
                   <Box display="flex" flexDirection="column" flexGrow="1">
                     <Navbar
                       authToken={authToken}
@@ -65,6 +70,8 @@ export default function App() {
                       setAuthToken={setAuthToken}
                       isAuth={isAuth}
                       setIsAuth={setIsAuth}
+                      funds={funds}
+                      setFunds={setFunds}
                     />
                   </Box>
                 </Box>

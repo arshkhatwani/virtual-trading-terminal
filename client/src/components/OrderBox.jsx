@@ -7,6 +7,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import { Typography, Button, Box, TextField } from "@material-ui/core";
+import axios from "axios";
+import url from "../url";
 
 function PaperComponent(props) {
   return (
@@ -20,13 +22,62 @@ function PaperComponent(props) {
 }
 
 export default function OrderBox(props) {
-  const { open, setOpen, title, ltp, type, msgOpen, setMsgOpen } = props;
+  const {
+    open,
+    setOpen,
+    title,
+    ltp,
+    type,
+    stock,
+    msgOpen,
+    setMsgOpen,
+    authToken,
+    setFunds,
+    setOrderMsg,
+  } = props;
 
   const btnColor = type === "buy" ? "primary" : "secondary";
   const themeColor = type === "buy" ? "#3f51b5" : "#ff3d00";
 
   const [price, setPrice] = useState(ltp);
   const [qty, setQty] = useState(1);
+
+  const placeOrder = () => {
+    axios
+      .post(
+        url + `/adddata/user/stock/${type}`,
+        {
+          stock: stock,
+          price: parseFloat(price),
+          qty: parseFloat(qty),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            auth: "bearer " + authToken,
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res);
+        if (res.status === 200) {
+          setFunds(res.data.newFunds);
+          handleClose();
+          setOrderMsg("success");
+          setMsgOpen(true);
+        }
+      })
+      .catch((e) => {
+        var res = e.response;
+        if (res.status === 406) {
+          handleClose();
+          setOrderMsg("insufficient funds");
+          setMsgOpen(true);
+        }
+      });
+    // handleClose();
+    // setMsgOpen(true);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -102,10 +153,7 @@ export default function OrderBox(props) {
             variant="contained"
             disableElevation
             color={btnColor}
-            onClick={() => {
-              handleClose();
-              setMsgOpen(true);
-            }}
+            onClick={placeOrder}
           >
             Execute
           </Button>

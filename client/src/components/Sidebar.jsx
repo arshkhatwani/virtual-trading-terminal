@@ -21,7 +21,9 @@ const drawerStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  const { authToken, funds, setFunds } = props;
+
   const classes = drawerStyles();
   const [searchRes, setSearchRes] = useState([]);
 
@@ -58,7 +60,7 @@ export default function Sidebar() {
             onChange={onChangeHandler}
           />
 
-          <PriceComp />
+          <PriceComp authToken={authToken} funds={funds} setFunds={setFunds} />
         </Box>
       </Drawer>
     </>

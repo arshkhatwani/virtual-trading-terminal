@@ -5,7 +5,9 @@ import StockTab from "./StockTab";
 import { Box } from "@material-ui/core";
 import useStyles from "../hooks/useStyles";
 
-export default function PriceComp() {
+export default function PriceComp(props) {
+  const { authToken, funds, setFunds } = props;
+
   const classes = useStyles();
 
   var [prices, setPrices] = useState({});
@@ -46,9 +48,21 @@ export default function PriceComp() {
                   key={index}
                   symbol={item.substring(8)}
                   ltp={prices[item]}
+                  authToken={authToken}
+                  funds={funds}
+                  setFunds={setFunds}
                 />
               );
-            return <StockTab key={index} symbol={item} ltp={prices[item]} />;
+            return (
+              <StockTab
+                key={index}
+                symbol={item}
+                ltp={prices[item]}
+                authToken={authToken}
+                funds={funds}
+                setFunds={setFunds}
+              />
+            );
           })}
         </Box>
       </Box>
