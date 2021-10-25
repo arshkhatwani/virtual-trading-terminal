@@ -5,6 +5,7 @@ import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Positions from "./components/Positions";
 import {
   Container,
   CssBaseline,
@@ -66,6 +67,33 @@ export default function App() {
                       active="Profile"
                     />
                     <Profile
+                      authToken={authToken}
+                      setAuthToken={setAuthToken}
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                      funds={funds}
+                      setFunds={setFunds}
+                    />
+                  </Box>
+                </Box>
+              </Route>
+
+              <Route path="/positions" exact>
+                <Box display="flex">
+                  <Sidebar
+                    authToken={authToken}
+                    funds={funds}
+                    setFunds={setFunds}
+                  />
+                  <Box display="flex" flexDirection="column" flexGrow="1">
+                    <Navbar
+                      authToken={authToken}
+                      setAuthToken={setAuthToken}
+                      isAuth={isAuth}
+                      setIsAuth={setIsAuth}
+                      active="Positions"
+                    />
+                    <Positions
                       authToken={authToken}
                       setAuthToken={setAuthToken}
                       isAuth={isAuth}

@@ -26,6 +26,10 @@ export default function Navbar(props) {
       to: "/profile",
       title: "Profile",
     },
+    {
+      to: "/positions",
+      title: "Positions",
+    },
   ];
 
   return (
