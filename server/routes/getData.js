@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config");
 const decodeToken = require("../middlewares/verifyDecodeToken");
 const stocks = require("../stocks");
+const userPositions = require("../models/userPositions");
 
 router.get("/", async (req, res) => {
   res.send("Here we get data");
@@ -61,6 +62,19 @@ router.get("/user/profile", decodeToken, async (req, res) => {
   }
 });
 
+// User positions
+router.get("/user/positions", decodeToken, async (req, res) => {
+  try {
+    const { uid } = req.headers.tokenData;
+
+    const userPos = await userPositions.find({ uid });
+    res.status(200).json(userPos);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 // Search query
 router.get("/search/query", async (req, res) => {
   try {
@@ -69,8 +83,11 @@ router.get("/search/query", async (req, res) => {
     // console.log(qry)
 
     var searchResults = stocks.filter((item) => {
-      return item.company_name.toLowerCase().includes(qry) || item.symbol.toLowerCase().includes(qry);
-    })
+      return (
+        item.company_name.toLowerCase().includes(qry) ||
+        item.symbol.toLowerCase().includes(qry)
+      );
+    });
 
     // console.log(searchResults);
 
