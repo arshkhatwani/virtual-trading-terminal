@@ -26,6 +26,7 @@ export default function App() {
   const [authToken, setAuthToken] = useState("");
   const [isAuth, setIsAuth] = useState(false);
   const [funds, setFunds] = useState(0);
+  var [prices, setPrices] = useState({});
 
   return (
     <>
@@ -57,6 +58,8 @@ export default function App() {
                     authToken={authToken}
                     funds={funds}
                     setFunds={setFunds}
+                    prices={prices}
+                    setPrices={setPrices}
                   />
                   <Box display="flex" flexDirection="column" flexGrow="1">
                     <Navbar
@@ -84,6 +87,8 @@ export default function App() {
                     authToken={authToken}
                     funds={funds}
                     setFunds={setFunds}
+                    prices={prices}
+                    setPrices={setPrices}
                   />
                   <Box display="flex" flexDirection="column" flexGrow="1">
                     <Navbar
@@ -100,6 +105,8 @@ export default function App() {
                       setIsAuth={setIsAuth}
                       funds={funds}
                       setFunds={setFunds}
+                      prices={prices}
+                      setPrices={setPrices}
                     />
                   </Box>
                 </Box>

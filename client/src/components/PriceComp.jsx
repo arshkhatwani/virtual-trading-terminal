@@ -6,11 +6,11 @@ import { Box } from "@material-ui/core";
 import useStyles from "../hooks/useStyles";
 
 export default function PriceComp(props) {
-  const { authToken, funds, setFunds } = props;
+  const { authToken, funds, setFunds, prices, setPrices } = props;
 
   const classes = useStyles();
 
-  var [prices, setPrices] = useState({});
+  // var [prices, setPrices] = useState({});
 
   useEffect(() => {
     const socket = io(url);
