@@ -11,6 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import PositionTab from "./PositionTab";
 
 export default function Positions(props) {
   const {
@@ -65,17 +66,6 @@ export default function Positions(props) {
       });
   }, []);
 
-  const getMTM = (ltp, price, qty) => {
-    var mtm = ((ltp - price) * qty).toFixed(2);
-    if (mtm > 0) {
-      return <b style={{ color: "#0ea600" }}>{mtm}</b>;
-    } else if (mtm < 0) {
-      return <b style={{ color: "#d90404" }}>{mtm}</b>;
-    } else {
-      return <b>{mtm}</b>;
-    }
-  };
-
   if (!isAuth) {
     return <Redirect to="/login" />;
   }
@@ -100,41 +90,19 @@ export default function Positions(props) {
                     <TableCell align="right">Qty</TableCell>
                     <TableCell align="right">Avg. cost</TableCell>
                     <TableCell align="right">LTP</TableCell>
-                    <TableCell align="right">P{"&"}L</TableCell>
+                    <TableCell align="right">{"P&L($)"}</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => (
-                    <TableRow
-                      key={row._id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.stock}
-                      </TableCell>
-                      <TableCell align="right">{row.qty}</TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">
-                        {row.stock.substr(
-                          row.stock.length - 4,
-                          row.stock.length
-                        ) === "USDT"
-                          ? prices["BINANCE:" + row.stock]
-                          : prices[row.stock]}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.stock.substr(
-                          row.stock.length - 4,
-                          row.stock.length
-                        ) === "USDT"
-                          ? getMTM(
-                              prices["BINANCE:" + row.stock],
-                              row.price,
-                              row.qty
-                            )
-                          : getMTM(prices[row.stock], row.price, row.qty)}
-                      </TableCell>
-                    </TableRow>
+                    <PositionTab
+                      authToken={authToken}
+                      funds={funds}
+                      setFunds={setFunds}
+                      prices={prices}
+                      row={row}
+                    />
                   ))}
                 </TableBody>
               </Table>

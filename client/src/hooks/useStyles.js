@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
   thinHeading: {
     fontWeight: 300,
   },
+  color_primary: {
+    color: "#3f51b5",
+  },
+  color_secondary: {
+    color: "#ff3d00",
+  },
 }));
 
 export default useStyles;
