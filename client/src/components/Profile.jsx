@@ -4,6 +4,7 @@ import axios from "axios";
 import url from "../url";
 import { Box, Typography } from "@material-ui/core";
 import useStyles from "../hooks/useStyles";
+import InvestmentChart from "./InvestmentChart";
 
 export default function Profile(props) {
   const { authToken, setAuthToken, isAuth, setIsAuth, funds, setFunds } = props;
@@ -72,6 +73,9 @@ export default function Profile(props) {
           <Typography className={[classes.text_secondary, classes.thinHeading]}>
             Margin available
           </Typography>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <InvestmentChart authToken={authToken} funds={funds} />
         </Box>
       </Box>
     </>

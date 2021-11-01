@@ -98,4 +98,20 @@ router.get("/search/query", async (req, res) => {
   }
 });
 
+// Get Investments
+router.get("/user/investments", decodeToken, async (req, res) => {
+  try {
+    const { uid } = req.headers.tokenData;
+
+    const pos = await userPositions
+      .find({ uid, qty: { $gt: 0 } })
+      .select({ stock: 1, price: 1, qty: 1 });
+
+    res.status(200).json(pos);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
