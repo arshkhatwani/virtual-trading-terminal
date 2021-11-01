@@ -134,7 +134,7 @@ export default function OrderBox(props) {
           </Box>
           <Box>
             <Typography style={{ float: "left" }}>
-              Margin: ${price * qty}
+              Margin: ${(price * qty).toFixed(2)}
             </Typography>
           </Box>
         </DialogContent>
