@@ -64,7 +64,42 @@ export default function Positions(props) {
           setRows(res.data);
         }
       });
-  }, []);
+  }, [funds]);
+
+  const checkPos = () => {
+    if (rows.length === 0)
+      return (
+        <h2 style={{ textAlign: "center" }} className={classes.thinHeading}>
+          You have no positions
+        </h2>
+      );
+    else
+      return (
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Instrument</TableCell>
+              <TableCell align="right">Qty</TableCell>
+              <TableCell align="right">Avg. cost</TableCell>
+              <TableCell align="right">LTP</TableCell>
+              <TableCell align="right">{"P&L($)"}</TableCell>
+              <TableCell align="right"></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <PositionTab
+                authToken={authToken}
+                funds={funds}
+                setFunds={setFunds}
+                prices={prices}
+                row={row}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      );
+  };
 
   if (!isAuth) {
     return <Redirect to="/login" />;
@@ -82,31 +117,7 @@ export default function Positions(props) {
         >
           <h1 className={classes.thinHeading}>Positions</h1>
           <Box>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Instrument</TableCell>
-                    <TableCell align="right">Qty</TableCell>
-                    <TableCell align="right">Avg. cost</TableCell>
-                    <TableCell align="right">LTP</TableCell>
-                    <TableCell align="right">{"P&L($)"}</TableCell>
-                    <TableCell align="right"></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <PositionTab
-                      authToken={authToken}
-                      funds={funds}
-                      setFunds={setFunds}
-                      prices={prices}
-                      row={row}
-                    />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <TableContainer component={Paper}>{checkPos()}</TableContainer>
           </Box>
         </Box>
       </Box>
