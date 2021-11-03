@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2";
 import { Box } from "@mui/system";
 import axios from "axios";
 import url from "../url";
+import useStyles from "../hooks/useStyles";
 
 const options = {
   scales: {
@@ -51,11 +52,20 @@ export default function InvestmentChart(props) {
     ],
   };
 
+  const classes = useStyles();
+
+  if (pos.length !== 0)
+    return (
+      <>
+        <Box width="70%">
+          <Bar data={data} options={options} />
+        </Box>
+      </>
+    );
+
   return (
-    <>
-      <Box width="70%">
-        <Bar data={data} options={options} />
-      </Box>
-    </>
+    <Box>
+      <h1 className={classes.thinHeading}>You currently have no investments</h1>
+    </Box>
   );
 }
