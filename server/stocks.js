@@ -23,6 +23,22 @@ const stocks = [
     company_name: "Etherium",
     symbol: "BINANCE:ETHUSDT",
   },
+  {
+    company_name: "Solana",
+    symbol: "BINANCE:SOLUSDT",
+  },
+  {
+    company_name: "Dogecoin",
+    symbol: "BINANCE:DOGEUSDT",
+  },
+  {
+    company_name: "Goldman Sachs",
+    symbol: "GS",
+  },
+  {
+    company_name: "Amazon",
+    symbol: "AMZN",
+  },
 ];
 
 module.exports = stocks;
