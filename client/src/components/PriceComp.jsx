@@ -6,11 +6,9 @@ import { Box } from "@material-ui/core";
 import useStyles from "../hooks/useStyles";
 
 export default function PriceComp(props) {
-  const { authToken, funds, setFunds, prices, setPrices } = props;
+  const { authToken, funds, setFunds, prices, setPrices, searchRes } = props;
 
   const classes = useStyles();
-
-  // var [prices, setPrices] = useState({});
 
   useEffect(() => {
     const socket = io(url);
@@ -19,7 +17,6 @@ export default function PriceComp(props) {
     });
 
     socket.on("price", (msg) => {
-      // console.log(msg);
       setPrices((prevPrice) => {
         return { ...prevPrice, [msg.symbol]: msg.ltp };
       });
@@ -31,10 +28,9 @@ export default function PriceComp(props) {
     };
   }, []);
 
-  return (
-    <>
-      <Box padding="6px">
-        <h1 className={classes.thinHeading}>Marketwatch</h1>
+  const getStocks = () => {
+    if (searchRes.length === 0) {
+      return (
         <Box
           display="flex"
           flexDirection="column"
@@ -53,19 +49,62 @@ export default function PriceComp(props) {
                   setFunds={setFunds}
                 />
               );
-            return (
-              <StockTab
-                key={index}
-                symbol={item}
-                ltp={prices[item]}
-                authToken={authToken}
-                funds={funds}
-                setFunds={setFunds}
-              />
-            );
+            else {
+              return (
+                <StockTab
+                  key={index}
+                  symbol={item}
+                  ltp={prices[item]}
+                  authToken={authToken}
+                  funds={funds}
+                  setFunds={setFunds}
+                />
+              );
+            }
           })}
         </Box>
-      </Box>
+      );
+    } else {
+      return (
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {searchRes.map((item, index) => {
+            if (item.symbol.substr(0, 7) === "BINANCE") {
+              return (
+                <StockTab
+                  key={index}
+                  symbol={item.symbol.substring(8)}
+                  ltp={prices[item.symbol]}
+                  authToken={authToken}
+                  funds={funds}
+                  setFunds={setFunds}
+                />
+              );
+            } else {
+              return (
+                <StockTab
+                  key={index}
+                  symbol={item.symbol}
+                  ltp={prices[item.symbol]}
+                  authToken={authToken}
+                  funds={funds}
+                  setFunds={setFunds}
+                />
+              );
+            }
+          })}
+        </Box>
+      );
+    }
+  };
+
+  return (
+    <>
+      <Box padding="6px">{getStocks()}</Box>
     </>
   );
 }

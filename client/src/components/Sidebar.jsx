@@ -10,14 +10,15 @@ const drawerStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
   },
-
   drawerPaper: {
     width: drawerWidth,
   },
-
   searchBarStyle: {
     outline: "none",
     border: "none",
+  },
+  thinHeading: {
+    fontWeight: 300,
   },
 }));
 
@@ -28,7 +29,6 @@ export default function Sidebar(props) {
   const [searchRes, setSearchRes] = useState([]);
 
   const onChangeHandler = (e) => {
-    // console.log(e.target.value);
     if (e.target.value !== "") {
       axios
         .get(url + "/getdata/search/query", {
@@ -38,10 +38,11 @@ export default function Sidebar(props) {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res.data);
             setSearchRes(res.data);
           }
         });
+    } else {
+      setSearchRes([]);
     }
   };
 
@@ -56,16 +57,21 @@ export default function Sidebar(props) {
         <Box display="flex" flexDirection="column">
           <TextField
             variant="outlined"
-            placeholder="Search stocks, indices etc."
+            placeholder="Search stocks, cryptos etc."
             onChange={onChangeHandler}
           />
-
+          <Box>
+            <h1 style={{ textAlign: "center" }} className={classes.thinHeading}>
+              Marketwatch
+            </h1>
+          </Box>
           <PriceComp
             authToken={authToken}
             funds={funds}
             setFunds={setFunds}
             prices={prices}
             setPrices={setPrices}
+            searchRes={searchRes}
           />
         </Box>
       </Drawer>
