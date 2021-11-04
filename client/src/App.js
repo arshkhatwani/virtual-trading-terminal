@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Positions from "./components/Positions";
+import About from "./components/About";
 import {
   Container,
   CssBaseline,
@@ -120,22 +121,7 @@ export default function App() {
                   setIsAuth={setIsAuth}
                   active="About"
                 />
-                <div>
-                  <h1>About Page</h1>
-                </div>
-              </Route>
-
-              <Route path="/contact" exact>
-                <Navbar
-                  authToken={authToken}
-                  setAuthToken={setAuthToken}
-                  isAuth={isAuth}
-                  setIsAuth={setIsAuth}
-                  active="Contact"
-                />
-                <div>
-                  <h1>Contact Page</h1>
-                </div>
+                <About />
               </Route>
 
               <h1>404 not found</h1>

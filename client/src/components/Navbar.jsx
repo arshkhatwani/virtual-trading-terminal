@@ -19,10 +19,6 @@ export default function Navbar(props) {
       title: "About",
     },
     {
-      to: "/contact",
-      title: "Contact",
-    },
-    {
       to: "/profile",
       title: "Profile",
     },
