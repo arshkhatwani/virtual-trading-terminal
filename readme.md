@@ -7,9 +7,7 @@
 - The Front-end is developed using React and back-end is developed using NodeJS with MongoDB as a database.
 - Socket IO and Finnhub API is used for streaming live market prices and JWT serves the purpose for authentication.
 
-### Project video:
-
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6862385695281971200?compact=1" height="284" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+### Project video [here](https://www.linkedin.com/posts/arshkhatwani_mern-nodejs-react-activity-6862386011461173248-NAvx)
 
 ## Screenshots
 
